@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Here are the items list </h1>
+    {% if items.count > 0 %}
+
+        <ul>
+            {% for item in items %}
+            <li> {{item.title}} - {{item.price}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> There are no items added in the list </p>
+    {% endif %}
+{% endblock %}
