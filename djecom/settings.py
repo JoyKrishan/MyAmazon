@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -99,3 +100,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Stripe Payment method
 STRIPE_API_KEY = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+
+django_heroku.settings(locals())
