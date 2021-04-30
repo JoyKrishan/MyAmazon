@@ -3,7 +3,9 @@ import os
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 DEBUG = True
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))  # F:\1_DJANGO\ecomweb\ecom\src\django_project_boilerplate
+
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66cjazj'
 ALLOWED_HOSTS = []
 
@@ -17,10 +19,11 @@ INSTALLED_APPS = [
     'core',
     # 3rd party apps
     'django.contrib.sites',
-
+    'django_countries',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -82,9 +85,17 @@ if ENVIRONMENT == 'production':
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Auth
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-
 ]
 SITE_ID = 1
+
+LOGIN_REDIRECT_URL = "/"  # Redirected to the homepage after login used with loginrequired and LoginMixin
+
+# Crispy forms
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Stripe Payment method
+STRIPE_API_KEY = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"

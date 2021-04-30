@@ -3,17 +3,6 @@
 {% block content %}
 <!--Main layout-->
 <main class="mt-5 pt-4">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endfor %}
-    {% endif %}
-
 
     <div class="container dark-grey-text mt-5">
 
@@ -23,7 +12,7 @@
             <!--Grid column-->
             <div class="col-md-6 mb-4">
 
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid"
+                <img src="{{object.image.url}}" class="img-fluid"
                      alt="">
 
             </div>
@@ -37,7 +26,7 @@
 
                     <div class="mb-3">
                         <a href="">
-                            <span class="badge purple mr-1">{{ object.get_category_display }}</span>
+                            <span class="badge purple mr-1">{{ object.get_category_display }}</span>  <!-- Shows the name of the category -->
                         </a>
                         <a href="">
                             <span class="badge blue mr-1">New</span>

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Your orders</h1>
+    {% for order in order_qs %}
+    <p>Your <b>#{{ forloop.counter }} order</b> </p>
+    <p style="font-size:10px"> <b>Reference-code:</b> {{order.ref_code}}</p>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total item price</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for order_item in order.items.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{order_item.item.title}}</td>
+                <td>{% if order_item.item.discount_price %}
+                    ${{ order_item.item.discount_price }}
+                    {% else %}
+                    ${{ order_item.item.price }}
+                    {% endif %}
+                </td>
+                <td>
+
+                    {{order_item.quantity}}
+
+                </td>
+                <td>{% if order_item.item.discount_price %}
+                    ${{ order_item.get_total_item_discount_price }}<span class="badge bg-primary">Saving ${{ order_item.get_amount_saved }}</span>
+                    {% else %}
+                    ${{ order_item.get_total_item_price }}
+                    {% endif %}
+                </td>
+                <td><h5><i style="color:green"  class="fas fa-check-circle"></i></h5></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Your shopping cart is empty</td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <a class="btn btn-primary float-right ml-2" href="/">Continue Shopping</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            {% if order.get_total %}
+            <tr>
+                <td colspan="4"><span class="badge bg-secondary"><h6>Order Total Price</h6></span></td>
+                <td><b>${{order.get_total}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <a class="btn btn-primary float-right ml-2" href="{% url 'refund_view' %}">Refund for Order #{{ forloop.counter }}</a>
+                </td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
