@@ -104,3 +104,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 STRIPE_API_KEY = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 
 django_heroku.settings(locals())
+
+# Avoiding SMTP server
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
