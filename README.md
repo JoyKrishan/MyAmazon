@@ -1,7 +1,6 @@
 <p align="center">
   <p align="center">
   
-    </a>
   </p>
   <p align="center">
     Web Application Using Django
